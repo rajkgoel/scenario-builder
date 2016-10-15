@@ -1,0 +1,25 @@
+<div name="scenario-selection" class="form-group">
+  <label for="cmbScenario">Select Scenario</label>
+  <select required name="cmbScenario" class="form-control" 
+          [(ngModel)]="scenario">
+      <option *ngFor="let scenario of scenarios" 
+              [ngValue]="scenario" >
+          {{scenario.Name}}
+      </option>
+  </select>
+  <button (click)='generateChartUsingC3()'>Generate Charts</button>
+</div>
+<br>
+<div>
+  <table>
+    <tr *ngFor="let country of scenario?.Countries">
+      <td width="80px" class="country-header">
+        {{country.Name}}
+      </td>
+      <td *ngFor="let curve of country.Curves">
+        <div class="curve-header">{{curve.Name}}</div>
+        <div [attr.id]="'chart' + country.Name + curve.Name" class="multi-chart-style"></div>
+      </td>
+    </tr>
+  </table> 
+</div>

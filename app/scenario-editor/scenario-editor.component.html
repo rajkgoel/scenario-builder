@@ -1,0 +1,112 @@
+<form>
+    <div name="scenario-selection" class="form-group">
+      <label id="lblScenario" for="cmbScenario">Select Scenario</label>
+      
+      <select required name="cmbScenario" class="form-control" 
+              [(ngModel)]="model.SelectedScenario">
+          <option *ngFor="let scenario of scenarios" 
+                  [ngValue]="scenario" >
+              {{scenario.Name}}
+          </option>
+      </select>
+     </div>
+<br>
+    <div name="countries-configuration" class="form-group">
+      <label id="lblCountry" for="lstCountries">Countries</label>
+      <table name="lstCountries">
+          <tr>
+                <th>Country</th>
+                <th>Proxy Country</th>
+                <th>Status</th>
+          </tr>
+          <tr 
+            (click)="setSelectedCountry(country)"
+            *ngFor="let country of model.SelectedScenario?.Countries"
+            [ngClass]="{selected: country.Name == model.SelectedCountry.Name}">
+              <td>{{country.Name}}</td>
+              <td> 
+                  <select (change)="country.ProxyCountry=$event.target.value">
+                      <option *ngFor="let cntry of allCountries"
+                          [value]="cntry"
+                          [selected]="cntry === country.ProxyCountry">
+                          {{cntry}}
+                      </option>
+                  </select>
+              </td>
+              <td>{{country.Status}}</td>
+          </tr>
+      </table>
+    </div>
+ <br>
+    <div name="curve-configuration" class="form-group">
+        <label for="lstCurves">Curves</label>
+        <table >
+            <tr>
+                <th>Curve Name</th>
+                <th>Proxy Curve</th>
+                <th>Method</th>
+                <th>Type</th>
+            </tr>
+            <tr *ngFor="let curve of model.SelectedCountry?.Curves"
+                [ngClass]="{selected: curve.Name == model.SelectedCurve?.Name}"
+                (click)="setSelectedCurve(curve)">
+                <td>{{curve.Name}}</td>
+                <td>{{curve.ProxyCurve}}</td>
+                <td>
+                    <select required class="form-control" 
+                        (change)="curve.Method=$event.target.value"> <!-- updateMethod($event.target.value, curve)"-->
+                        <option *ngFor="let method of methods"
+                            [value]="method"
+                            [selected]="method === curve.Method">
+                            {{method}}
+                        </option>
+                    </select>
+                </td>
+                <td>{{curve.Type}}</td>
+            </tr>
+        </table>
+    </div>
+ <br>
+    <div name="shocks-configuration" class="form-group">
+        <label for="lstStresses">Stress</label>
+        <table name="lstStresses">
+            <tr>
+                <td *ngFor="let stress of model.SelectedCurve?.Stresses">
+                    <div>
+                        <select (change)="stress.Tenor=$event.target.value">
+                           <option *ngFor="let tenor of tenors" 
+                                [value]="tenor" 
+                                [selected]="tenor == stress.Tenor">
+                                {{tenor}}
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" name="txtShock"
+                            [value]="stress.Shock"
+                            (change)="stress.Shock=$event.target.value" width="100px"/>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+<br>
+    <div>
+        <button md-raised-button color="primary" (click)='generateChartUsingC3(chart)'>Generate Chart</button>
+        <button md-raised-button color="primary" (click)='saveScenario()'>Save Scenario</button>
+    </div>
+ <br>
+    <label id="chartLabel1" for="chart1" name="chartLabel1"></label>
+    <div id="chart1" class="chart-style"></div>
+
+    <label id="chartLabel2" for="chart2" name="chartLabel2"></label>
+    <div id="chart2" class="chart-style"></div>
+
+    <label id="chartLabel3" for="chart3" name="chartLabel3"></label>
+    <div id="chart3" class="chart-style"></div>
+
+    <label id="chartLabel4" for="chart4" name="chartLabel4"></label>
+    <div id="chart4" class="chart-style"></div>
+      
+  </form>
+

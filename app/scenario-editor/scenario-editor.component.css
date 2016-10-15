@@ -1,0 +1,10 @@
+.chart-style {
+  width: 100%;
+  height: 400px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
