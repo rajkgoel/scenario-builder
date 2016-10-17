@@ -39,11 +39,7 @@ export class ScenarioEditorComponent implements OnInit {
                      .subscribe(
                        scenarios => this.scenarios = scenarios,
                        error =>  this.errorMessage = <any>error);
-
-    //this.scenarios = this._scenarioService.getScenarios();
-    console.log('Scenarios: ' + this.scenarios.length);
-    console.log('Error Message: ' + this.errorMessage);
-
+      
     this.allCountries = this._staticDataServices.getCountries();
     this.methods = this._staticDataServices.getMethods();
     this.tenors = this._staticDataServices.getTenors();
@@ -65,7 +61,7 @@ export class ScenarioEditorComponent implements OnInit {
   }
 
   generateChartUsingC3(chartArea: any)
-    {
+  {
         console.log('making chart');
         var chart = new Chart();
         var index : number = 1;

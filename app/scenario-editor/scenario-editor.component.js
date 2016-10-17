@@ -27,9 +27,6 @@ var ScenarioEditorComponent = (function () {
         var _this = this;
         this._scenarioService.getScenarios1()
             .subscribe(function (scenarios) { return _this.scenarios = scenarios; }, function (error) { return _this.errorMessage = error; });
-        //this.scenarios = this._scenarioService.getScenarios();
-        console.log('Scenarios: ' + this.scenarios.length);
-        console.log('Error Message: ' + this.errorMessage);
         this.allCountries = this._staticDataServices.getCountries();
         this.methods = this._staticDataServices.getMethods();
         this.tenors = this._staticDataServices.getTenors();

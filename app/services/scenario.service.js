@@ -16,7 +16,7 @@ require('rxjs/add/operator/catch');
 var ScenarioService = (function () {
     function ScenarioService(http) {
         this.http = http;
-        this.scenarioUrl = 'http://localhost:52698/api/scenarios'; // URL to web api
+        this.scenarioUrl = 'http://localhost:52698/api/scenarios';
         this.headers = new http_2.Headers({ 'Content-Type': 'application/json' });
     }
     ScenarioService.prototype.getScenarios1 = function () {

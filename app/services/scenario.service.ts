@@ -11,9 +11,11 @@ import 'rxjs/add/operator/catch';
 @Injectable()
 export class ScenarioService {
 
-    private scenarioUrl = 'http://localhost:52698/api/scenarios';  // URL to web api
+    private scenarioUrl : string;  // URL to web api
     private headers: Headers;
+    
     constructor(private http: Http) {
+        this.scenarioUrl = 'http://localhost:52698/api/scenarios';
         this.headers = new Headers({'Content-Type': 'application/json'});
      }
 
