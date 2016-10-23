@@ -15,13 +15,11 @@ var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
 require('rxjs/add/operator/map');
 var app_component_1 = require('./app.component');
-var scenario_editor_component_1 = require('./scenario-editor/scenario-editor.component');
-var multi_curves_component_1 = require('./multi-curves/multi-curves.component');
 var scenario_service_1 = require('./services/scenario.service');
 var static_data_service_1 = require('./services/static-data.service');
-// Imports for loading & configuring the in-memory web api
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { ScenarioData }  from './scenario-data';
+var highlight_zero_shocks_1 = require('./directives/highlight-zero.shocks');
+var multi_curves_module_1 = require('./multi-curves/multi-curves.module');
+var scenario_editor_module_1 = require('./scenario-editor/scenario-editor.module');
 var AppModule = (function () {
     function AppModule() {
     }
@@ -33,11 +31,12 @@ var AppModule = (function () {
                 http_1.HttpModule,
                 http_1.JsonpModule,
                 app_routing_1.routing,
+                scenario_editor_module_1.ScenarioEditorModule,
+                multi_curves_module_1.MultiCurvesModule
             ],
             declarations: [
                 app_component_1.AppComponent,
-                scenario_editor_component_1.ScenarioEditorComponent,
-                multi_curves_component_1.MultiCurvesComponent
+                highlight_zero_shocks_1.HighlightZeroShocksDirective
             ],
             providers: [
                 scenario_service_1.ScenarioService,

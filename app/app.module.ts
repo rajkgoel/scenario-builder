@@ -7,15 +7,13 @@ import { HttpModule, JsonpModule }    from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { AppComponent }   from './app.component';
-import { ScenarioEditorComponent } from './scenario-editor/scenario-editor.component';
-import { MultiCurvesComponent }  from './multi-curves/multi-curves.component';
 
 import { ScenarioService } from './services/scenario.service';
 import { StaticDataService } from './services/static-data.service';
+import { HighlightZeroShocksDirective } from './directives/highlight-zero.shocks';
 
-// Imports for loading & configuring the in-memory web api
-//import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
-//import { ScenarioData }  from './scenario-data';
+import { MultiCurvesModule } from './multi-curves/multi-curves.module';
+import { ScenarioEditorModule } from './scenario-editor/scenario-editor.module';
 
 @NgModule({
   imports:      [ 
@@ -24,6 +22,8 @@ import { StaticDataService } from './services/static-data.service';
     HttpModule,
     JsonpModule,
     routing,
+    ScenarioEditorModule,
+    MultiCurvesModule
     /*InMemoryWebApiModule.forRoot(ScenarioData)
     MdCoreModule.forRoot(),
     MdInputModule.forRoot(),
@@ -31,8 +31,7 @@ import { StaticDataService } from './services/static-data.service';
     ],
   declarations: [ 
     AppComponent,
-    ScenarioEditorComponent,
-    MultiCurvesComponent
+    HighlightZeroShocksDirective
     ],
   providers: [
     ScenarioService, 
