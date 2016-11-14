@@ -12,6 +12,7 @@ var Stress = (function () {
         },
         set: function (base) {
             this._base = base;
+            this.StressLevel = this._base + this._shock;
         },
         enumerable: true,
         configurable: true
@@ -22,6 +23,7 @@ var Stress = (function () {
         },
         set: function (shock) {
             this._shock = shock;
+            this.StressLevel = this._base + this._shock;
         },
         enumerable: true,
         configurable: true

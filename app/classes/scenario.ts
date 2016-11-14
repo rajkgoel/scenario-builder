@@ -7,5 +7,6 @@ class Scenario {
   Name: string;
   Countries: Country[];
   constructor(){
+    this.Countries = [];
   }
 }

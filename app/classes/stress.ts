@@ -11,6 +11,7 @@ class Stress {
     }
     set Base(base: number) {
         this._base = base;
+        this.StressLevel = this._base + this._shock;
     }
 
     private _shock: number;
@@ -19,6 +20,7 @@ class Stress {
     }
     set Shock(shock: number) {
         this._shock = shock;
+        this.StressLevel = this._base + this._shock;
     }
 
     constructor(tenor: string, shock: number, base: number){

@@ -1,15 +1,15 @@
 <form>
     <div name="scenario-selection" class="form-group">
-      <label id="lblScenario" for="cmbScenario">Select Scenario</label>
-      
-      <select required name="cmbScenario" class="form-control" 
-              [(ngModel)]="model.SelectedScenario">
-          <option *ngFor="let scenario of scenarios" 
-                  [ngValue]="scenario" >
-              {{scenario.Name}}
-          </option>
-      </select>
-     </div>
+        <label id="lblScenario" for="cmbScenario">Select Scenario</label>
+        
+        <select required name="cmbScenario" class="form-control" 
+                [(ngModel)]="model.SelectedScenario">
+            <option *ngFor="let scenario of scenarios" 
+                    [ngValue]="scenario" >
+                {{scenario.Name}}
+            </option>
+        </select>
+    </div>
 <br>
     <div name="countries-configuration" class="form-group">
       <label id="lblCountry" for="lstCountries">Countries</label>

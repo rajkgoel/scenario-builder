@@ -1,1 +1,1 @@
-{"version":3,"file":"scenario.js","sourceRoot":"","sources":["scenario.ts"],"names":[],"mappings":";AACA;IAOE;IACA,CAAC;IACH,eAAC;AAAD,CAAC,AATD,IASC;AANK,gBAAQ,WAMb,CAAA"}
+{"version":3,"file":"scenario.js","sourceRoot":"","sources":["scenario.ts"],"names":[],"mappings":";AACA;IAOE;QACE,IAAI,CAAC,SAAS,GAAG,EAAE,CAAC;IACtB,CAAC;IACH,eAAC;AAAD,CAAC,AAVD,IAUC;AAPK,gBAAQ,WAOb,CAAA"}

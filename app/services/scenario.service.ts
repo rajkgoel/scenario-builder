@@ -26,13 +26,16 @@ export class ScenarioService {
        return resp;
     }
 
-    saveScenarioPost(scenario: Scenario)
+    saveScenarioPost(scenario: Scenario): Observable<Scenario>
     {
         let value = JSON.stringify({scenario: scenario});
-        console.log("scenario.service.ts: Saving scenario " + value);
+        console.log("scenario.service.ts: Posting scenario " + value);
+        
         var resp = this.http
-                    .post(this.scenarioUrl, value, {headers: this.headers});
-        console.log(JSON.stringify(resp));
+                    .post(this.scenarioUrl, JSON.stringify(scenario), {headers: this.headers})
+                    .map((resp: Response) => resp.json())
+                    .catch(this.handleError);
+        return resp;
     }
 
     saveScenarioPut(scenario: Scenario): Promise<Scenario>

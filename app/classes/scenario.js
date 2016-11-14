@@ -1,6 +1,7 @@
 "use strict";
 var Scenario = (function () {
     function Scenario() {
+        this.Countries = [];
     }
     return Scenario;
 }());

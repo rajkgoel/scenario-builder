@@ -4,11 +4,12 @@ export /**
  * country
  */
 class Country {
-    ProxyCountry: string;
-    Status: string;
     Id: number;
     Name: string;
     Curves: Curve[];
+    ProxyCountry: string;
+    Status: string;
+    
     constructor(
         ) {
         this.ProxyCountry = "";
