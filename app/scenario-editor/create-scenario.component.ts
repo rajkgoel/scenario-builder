@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Scenario } from '../classes/scenario';
 import { Country } from '../classes/country';
-
 import { ScenarioService } from '../services/scenario.service';
 import { StaticDataService } from '../services/static-data.service';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   moduleId: module.id,
@@ -21,12 +20,33 @@ export class CreateScenarioComponent implements OnInit {
     submitted = false;
     anyCountriesSelected = true;
 
-    constructor(private _scenarioService: ScenarioService, 
-                private _staticDataServices: StaticDataService) {}
+    constructor(private route: ActivatedRoute,
+                private router: Router,
+                private _scenarioService: ScenarioService, 
+                private _staticDataServices: StaticDataService) {
+        this.scenario = new Scenario();
+    }
 
     ngOnInit() {
-        this.scenario = new Scenario();
+
         this.allCountries = this._staticDataServices.getCountries().filter(c => c.length > 0);
+        this.route.params.forEach((params: Params) => {
+            let id = +params['id']; 
+            if(id != undefined && id > 0) {
+                this._scenarioService.getScenario(id)
+                    .subscribe(scenario => {
+                        this.scenario = scenario;
+                        this.selectedCountries = [];
+                        this.scenario.Countries.forEach(c=>this.selectedCountries.push(c.Name));
+                    });
+                //this.resetCountriesSelection();
+            }
+        });
+    }
+
+    resetCountriesSelection(){
+        this.selectedCountries = new Array<string>();
+        this.scenario.Countries.forEach(c => this.onSelectCountry(c.Name));
     }
 
     onSubmit() { this.submitted = true; }

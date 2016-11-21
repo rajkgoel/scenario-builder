@@ -18,7 +18,7 @@ var MultiCurvesComponent = (function () {
     }
     MultiCurvesComponent.prototype.ngOnInit = function () {
         var _this = this;
-        this._scenarioService.getScenarios1()
+        this._scenarioService.getScenarios()
             .subscribe(function (scenarios) { return _this.scenarios = scenarios; }, function (error) { return _this.errorMessage = error; });
         console.log('Scenarios: ' + this.scenarios.length);
         console.log('Error Message: ' + this.errorMessage);

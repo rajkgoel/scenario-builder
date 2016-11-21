@@ -7,6 +7,7 @@ import { StaticDataService } from '../services/static-data.service';
 import { ScenarioEditor } from '../model/scenario-editor';
 import { NgClass } from '@angular/common';
 import { Chart } from '../classes/chart';
+import { Router } from '@angular/router';
 
 declare var d3: any;
 import { Observable }     from 'rxjs/Observable';
@@ -25,8 +26,9 @@ export class ScenarioEditorComponent implements OnInit {
   tenors: string[];
   errorMessage: string;
 
-  constructor(private _scenarioService: ScenarioService, 
-              private _staticDataServices: StaticDataService) {}
+  constructor(private router: Router,
+            private _scenarioService: ScenarioService, 
+            private _staticDataServices: StaticDataService) {}
 
   ngOnInit() {
     this.getDataFromServer();
@@ -35,14 +37,17 @@ export class ScenarioEditorComponent implements OnInit {
 
   getDataFromServer()
   {
-    this._scenarioService.getScenarios1()
-                     .subscribe(
-                       scenarios => this.scenarios = scenarios,
-                       error =>  this.errorMessage = <any>error);
-      
+    this.getScenarios();  
     this.allCountries = this._staticDataServices.getCountries();
     this.methods = this._staticDataServices.getMethods();
     this.tenors = this._staticDataServices.getTenors();
+  }
+
+  getScenarios(){
+    this._scenarioService.getScenarios()
+            .subscribe(
+            scenarios => this.scenarios = scenarios,
+            error =>  this.errorMessage = <any>error);
   }
 
   setSelectedScenario(scenario: Scenario)
@@ -136,6 +141,26 @@ export class ScenarioEditorComponent implements OnInit {
         {
             console.log("Saving Scenario" + this.model.SelectedScenario.Name);
             this._scenarioService.saveScenarioPut(this.model.SelectedScenario);
+        }
+    }
+
+    editScenario()
+    {
+        if(this.model.SelectedScenario != null && this.model.SelectedScenario.Id > 0 )
+        {
+            this.router.navigate(['/createscenario', this.model.SelectedScenario.Id])
+        }
+    }
+
+    deleteScenario()
+    {
+        if(this.model.SelectedScenario != null && this.model.SelectedScenario.Id > 0 )
+        {
+            console.log("Deleting Scenario: " + this.model.SelectedScenario.Id + " - " + 
+                            this.model.SelectedScenario.Name)
+            this._scenarioService.deleteScenario(this.model.SelectedScenario);
+            this.getScenarios();
+            this.model = new ScenarioEditor();
         }
     }
 

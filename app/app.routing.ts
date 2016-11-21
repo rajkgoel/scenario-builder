@@ -6,6 +6,7 @@ import { MultiCurvesComponent } from './multi-curves/multi-curves.component';
 
 const appRoutes: Routes = [
   { path: 'scenarioeditor', component: ScenarioEditorComponent, data: { subTitle: 'Scenario Editor'} },
+  { path: 'createscenario/:id', component: CreateScenarioComponent, data: { subTitle: 'Edit Scenario'} },
   { path: 'createscenario', component: CreateScenarioComponent, data: { subTitle: 'Add Scenario'} },
   { path: 'multicurves', component: MultiCurvesComponent, data: { subTitle: 'All Country Charts'} },
   { path: '', component: ScenarioEditorComponent, data: { title: 'Scenario Editor'} },

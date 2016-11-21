@@ -19,7 +19,14 @@ var ScenarioService = (function () {
         this.scenarioUrl = 'http://localhost:52698/api/scenarios';
         this.headers = new http_2.Headers({ 'Content-Type': 'application/json' });
     }
-    ScenarioService.prototype.getScenarios1 = function () {
+    ScenarioService.prototype.getScenario = function (id) {
+        var url = this.scenarioUrl + "/" + id;
+        var resp = this.http.get(url)
+            .map(function (resp) { return resp.json(); })
+            .catch(this.handleError);
+        return resp;
+    };
+    ScenarioService.prototype.getScenarios = function () {
         var resp = this.http.get(this.scenarioUrl)
             .map(function (resp) { return resp.json(); })
             .catch(this.handleError);
@@ -42,6 +49,13 @@ var ScenarioService = (function () {
             .toPromise()
             .then(function () { return scenario; })
             .catch(this.handleError);
+        return resp;
+    };
+    ScenarioService.prototype.deleteScenario = function (scenario) {
+        var url = this.scenarioUrl + "/" + scenario.Id;
+        console.log(url);
+        var resp = this.http.delete(url).subscribe(function (res) { });
+        console.log(resp);
         return resp;
     };
     ScenarioService.prototype.handleError = function (error) {

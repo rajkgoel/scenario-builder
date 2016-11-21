@@ -18,7 +18,7 @@ export class MultiCurvesComponent implements OnInit {
   constructor(private _scenarioService: ScenarioService) { }
 
   ngOnInit() {
-     this._scenarioService.getScenarios1()
+     this._scenarioService.getScenarios()
                      .subscribe(
                        scenarios => this.scenarios = scenarios,
                        error =>  this.errorMessage = <any>error);

@@ -9,7 +9,7 @@ import { CreateScenarioComponent }  from './create-scenario.component';
 
 
 @NgModule({
-  imports:      [CommonModule, FormsModule ],
+  imports:      [ CommonModule, FormsModule ],
   declarations: [ ScenarioEditorComponent, CreateScenarioComponent ],
   exports:      [ ScenarioEditorComponent, CreateScenarioComponent ]
 })

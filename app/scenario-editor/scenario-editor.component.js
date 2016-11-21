@@ -13,8 +13,10 @@ var scenario_service_1 = require('../services/scenario.service');
 var static_data_service_1 = require('../services/static-data.service');
 var scenario_editor_1 = require('../model/scenario-editor');
 var chart_1 = require('../classes/chart');
+var router_1 = require('@angular/router');
 var ScenarioEditorComponent = (function () {
-    function ScenarioEditorComponent(_scenarioService, _staticDataServices) {
+    function ScenarioEditorComponent(router, _scenarioService, _staticDataServices) {
+        this.router = router;
         this._scenarioService = _scenarioService;
         this._staticDataServices = _staticDataServices;
         this.scenarios = [];
@@ -24,12 +26,15 @@ var ScenarioEditorComponent = (function () {
         this.model = new scenario_editor_1.ScenarioEditor();
     };
     ScenarioEditorComponent.prototype.getDataFromServer = function () {
-        var _this = this;
-        this._scenarioService.getScenarios1()
-            .subscribe(function (scenarios) { return _this.scenarios = scenarios; }, function (error) { return _this.errorMessage = error; });
+        this.getScenarios();
         this.allCountries = this._staticDataServices.getCountries();
         this.methods = this._staticDataServices.getMethods();
         this.tenors = this._staticDataServices.getTenors();
+    };
+    ScenarioEditorComponent.prototype.getScenarios = function () {
+        var _this = this;
+        this._scenarioService.getScenarios()
+            .subscribe(function (scenarios) { return _this.scenarios = scenarios; }, function (error) { return _this.errorMessage = error; });
     };
     ScenarioEditorComponent.prototype.setSelectedScenario = function (scenario) {
         this.model.SelectedScenario = scenario;
@@ -102,6 +107,20 @@ var ScenarioEditorComponent = (function () {
             this._scenarioService.saveScenarioPut(this.model.SelectedScenario);
         }
     };
+    ScenarioEditorComponent.prototype.editScenario = function () {
+        if (this.model.SelectedScenario != null && this.model.SelectedScenario.Id > 0) {
+            this.router.navigate(['/createscenario', this.model.SelectedScenario.Id]);
+        }
+    };
+    ScenarioEditorComponent.prototype.deleteScenario = function () {
+        if (this.model.SelectedScenario != null && this.model.SelectedScenario.Id > 0) {
+            console.log("Deleting Scenario: " + this.model.SelectedScenario.Id + " - " +
+                this.model.SelectedScenario.Name);
+            this._scenarioService.deleteScenario(this.model.SelectedScenario);
+            this.getScenarios();
+            this.model = new scenario_editor_1.ScenarioEditor();
+        }
+    };
     Object.defineProperty(ScenarioEditorComponent.prototype, "diagnostic", {
         get: function () {
             if (this.model == null || this.model.SelectedCurve == null)
@@ -119,7 +138,7 @@ var ScenarioEditorComponent = (function () {
             templateUrl: 'scenario-editor.component.html',
             styleUrls: ['scenario-editor.component.css']
         }), 
-        __metadata('design:paramtypes', [scenario_service_1.ScenarioService, static_data_service_1.StaticDataService])
+        __metadata('design:paramtypes', [router_1.Router, scenario_service_1.ScenarioService, static_data_service_1.StaticDataService])
     ], ScenarioEditorComponent);
     return ScenarioEditorComponent;
 }());

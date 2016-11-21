@@ -5,6 +5,7 @@ var create_scenario_component_1 = require('./scenario-editor/create-scenario.com
 var multi_curves_component_1 = require('./multi-curves/multi-curves.component');
 var appRoutes = [
     { path: 'scenarioeditor', component: scenario_editor_component_1.ScenarioEditorComponent, data: { subTitle: 'Scenario Editor' } },
+    { path: 'createscenario/:id', component: create_scenario_component_1.CreateScenarioComponent, data: { subTitle: 'Edit Scenario' } },
     { path: 'createscenario', component: create_scenario_component_1.CreateScenarioComponent, data: { subTitle: 'Add Scenario' } },
     { path: 'multicurves', component: multi_curves_component_1.MultiCurvesComponent, data: { subTitle: 'All Country Charts' } },
     { path: '', component: scenario_editor_component_1.ScenarioEditorComponent, data: { title: 'Scenario Editor' } },

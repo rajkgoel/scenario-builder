@@ -19,7 +19,15 @@ export class ScenarioService {
         this.headers = new Headers({'Content-Type': 'application/json'});
      }
 
-    getScenarios1(): Observable<Scenario[]> {
+    getScenario(id: number): Observable<Scenario> {
+       const url = `${this.scenarioUrl}/${id}`;
+       var resp = this.http.get(url)
+                    .map((resp: Response) => resp.json())
+                    .catch(this.handleError);
+       return resp;
+    }
+
+    getScenarios(): Observable<Scenario[]> {
        var resp = this.http.get(this.scenarioUrl)
                     .map((resp: Response) => resp.json())
                     .catch(this.handleError);
@@ -49,6 +57,14 @@ export class ScenarioService {
                     .then(() => scenario)
                     .catch(this.handleError);
         return resp;
+    }
+
+    deleteScenario(scenario: Scenario){
+       const url = `${this.scenarioUrl}/${scenario.Id}`;
+       console.log(url);
+       var resp = this.http.delete(url).subscribe((res) => { });
+        console.log(resp);
+       return resp;
     }
 
     private handleError (error: any) {
